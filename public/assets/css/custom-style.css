@@ -1,0 +1,7 @@
+/*your custom css goes here*/ 
+
+.aiz-megabox > input:checked ~ .aiz-megabox-elem, .aiz-megabox > input:checked ~ .aiz-megabox-elem{
+    background-color: var(--primary);
+    width: 150px;
+    color: white;
+}
