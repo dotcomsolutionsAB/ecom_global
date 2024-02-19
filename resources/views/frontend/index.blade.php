@@ -2,14 +2,13 @@
 
 @section('content')
     <!-- Sliders & Today's deal -->
-    <div class="home-banner-area mb-3" style="">
+    <!-- <div class="home-banner-area mb-3" style="">
         <div class="container">
             <div class="d-flex flex-wrap position-relative">
                 <div class="position-static d-none d-xl-block">
                     @include('frontend.partials.category_menu')
                 </div>
 
-                <!-- Sliders -->
                 <div class="home-slider">
                     @if (get_setting('home_slider_images') != null)
                         <div class="aiz-carousel dots-inside-bottom mobile-img-auto-height" data-autoplay="true">
@@ -20,7 +19,6 @@
                             @foreach ($sliders as $key => $slider)
                                 <div class="carousel-box">
                                     <a href="{{ json_decode(get_setting('home_slider_links'), true)[$key] }}">
-                                        <!-- Image -->
                                         <img class="d-block mw-100 img-fit overflow-hidden h-sm-auto h-md-320px h-lg-460px overflow-hidden"
                                             src="{{ $slider ? my_asset($slider->file_name) : static_asset('assets/img/placeholder.jpg') }}"
                                             alt="{{ env('APP_NAME') }} promo"
@@ -33,7 +31,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Flash Deal -->
     @php
@@ -270,43 +268,36 @@
     @endif
 
     <!-- Best Selling  -->
-    <div id="section_best_selling">
+    {{-- Best Selling --}}
+  <div id="section_best_selling">
 
-    </div>
+  </div>
 
-    <!-- New Products -->
-    <div id="section_newest">
+  <div id="section_brands">
 
-    </div>
+  </div>
 
-    <!-- Banner Section 3 -->
-    @if (get_setting('home_banner3_images') != null)
-        <div class="mb-2 mb-md-3 mt-2 mt-md-3">
-            <div class="container">
-                @php
-                    $banner_3_imags = json_decode(get_setting('home_banner3_images'));
-                    $data_md = count($banner_3_imags) >= 2 ? 2 : 1;
-                @endphp
-                <div class="aiz-carousel gutters-16 overflow-hidden arrow-inactive-none arrow-dark arrow-x-15"
-                    data-items="{{ count($banner_3_imags) }}" data-xxl-items="{{ count($banner_3_imags) }}"
-                    data-xl-items="{{ count($banner_3_imags) }}" data-lg-items="{{ $data_md }}"
-                    data-md-items="{{ $data_md }}" data-sm-items="1" data-xs-items="1" data-arrows="true"
-                    data-dots="false">
-                    @foreach ($banner_3_imags as $key => $value)
-                        <div class="carousel-box overflow-hidden hov-scale-img">
-                            <a href="{{ json_decode(get_setting('home_banner3_links'), true)[$key] }}"
-                                class="d-block text-reset overflow-hidden">
-                                <img src="{{ static_asset('assets/img/placeholder-rect.jpg') }}"
-                                    data-src="{{ uploaded_asset($value) }}" alt="{{ env('APP_NAME') }} promo"
-                                    class="img-fluid lazyload w-100 has-transition"
-                                    onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+  {{-- Banner Section 2 --}}
+  @if (get_setting('home_banner2_images') != null)
+    <div class="mb-4">
+      <div class="container-fluid">
+        <div class="row gutters-10">
+          @php $banner_2_imags = json_decode(get_setting('home_banner2_images')); @endphp
+          @foreach ($banner_2_imags as $key => $value)
+            <div class="col-xl col-6">
+              <div class="mb-3 mb-lg-0">
+                <a href="{{ json_decode(get_setting('home_banner2_links'), true)[$key] }}" class="d-block text-reset">
+                  <img src="{{ static_asset('assets/img/placeholder-rect.jpg') }}"
+                    data-src="{{ uploaded_asset($banner_2_imags[$key]) }}" alt="{{ env('APP_NAME') }} promo"
+                    class="img-fluid lazyload w-100">
+                </a>
+              </div>
             </div>
+          @endforeach
         </div>
-    @endif
+      </div>
+    </div>
+  @endif
 
     <!-- Auction Product -->
     @if (addon_is_activated('auction'))

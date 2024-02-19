@@ -3,7 +3,7 @@
 @section('content')
 
 @php
-    CoreComponentRepository::instantiateShopRepository();
+    <!-- CoreComponentRepository::instantiateShopRepository(); -->
     CoreComponentRepository::initializeCache();
 @endphp
 
@@ -237,13 +237,12 @@
                                 </div>
                             </div>
 
-                            <!-- Flash Deal -->
+                            <!-- Flash Deal
                             <h5 class="mb-3 mt-4 pb-3 fs-17 fw-700" style="border-bottom: 1px dashed #e4e5eb;">
                                 {{translate('Flash Deal')}}
                                 <small class="text-muted">({{ translate('If you want to select this product as a flash deal, you can use it') }})</small>
                             </h5>
                             <div class="w-100">
-                                <!-- Add To Flash -->
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">{{translate('Add To Flash')}}</label>
                                     <div class="col-xxl-9">
@@ -256,7 +255,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Discount -->
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">{{translate('Discount')}}</label>

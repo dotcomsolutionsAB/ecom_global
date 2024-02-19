@@ -63,7 +63,7 @@ class HomeController extends Controller
     public function load_newest_product_section()
     {
         $newest_products = Cache::remember('newest_products', 3600, function () {
-            return filter_products(Product::latest())->limit(12)->get();
+            return filter_products(Product::whereNotNull('photos')->latest())->limit(12)->get();
         });
 
         return view('frontend.' . get_setting('homepage_select') . '.partials.newest_products_section', compact('newest_products'));

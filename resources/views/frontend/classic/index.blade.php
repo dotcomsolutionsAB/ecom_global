@@ -10,14 +10,13 @@
     </style>
     @php $lang = get_system_language()->code;  @endphp
     <!-- Sliders -->
-    <div class="home-banner-area mb-3" style="">
+    <!-- <div class="home-banner-area mb-3" style="">
         <div class="container">
             <div class="d-flex flex-wrap position-relative">
                 <div class="position-static d-none d-xl-block">
                     @include('frontend.'.get_setting("homepage_select").'.partials.category_menu')
                 </div>
 
-                <!-- Sliders -->
                 <div class="home-slider">
                     @if (get_setting('home_slider_images', null, $lang) != null)
                         <div class="aiz-carousel dots-inside-bottom" data-autoplay="true" data-infinite="true">
@@ -29,7 +28,6 @@
                             @foreach ($sliders as $key => $slider)
                                 <div class="carousel-box">
                                     <a href="{{ isset(json_decode($home_slider_links, true)[$key]) ? json_decode($home_slider_links, true)[$key] : '' }}">
-                                        <!-- Image -->
                                         <img class="d-block mw-100 img-fit overflow-hidden h-180px h-md-320px h-lg-460px overflow-hidden"
                                             src="{{ $slider ? my_asset($slider->file_name) : static_asset('assets/img/placeholder.jpg') }}"
                                             alt="{{ env('APP_NAME') }} promo"
@@ -42,18 +40,47 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <div class="home-banner-area pt-3">
+    <div class="container-fluid">
+      <div class="row gutters-10 position-relative">
+        <div class="col-lg-3 position-static d-none d-lg-block">
+          @include('frontend.partials.category_menu')
+        </div>
 
-    <!-- Flash Deal -->
+        @php
+          //$num_todays_deal = count($todays_deal_products);
+        @endphp
+        <div class="col-lg-7">
+          @if (get_setting('home_slider_images') != null)
+            <div class="aiz-carousel dots-inside-bottom mobile-img-auto-height" data-infinite="true" data-arrows="true"
+              data-dots="true" data-autoplay="true">
+              @php $slider_images = json_decode(get_setting('home_slider_images'), true); @endphp
+              @foreach ($slider_images as $key => $value)
+                <div class="carousel-box">
+                  <a href="{{ json_decode(get_setting('home_slider_links'), true)[$key] }}">
+                    <img class="d-block mw-100 img-fit rounded shadow-sm overflow-hidden"
+                      src="{{ uploaded_asset($slider_images[$key]) }}" alt="{{ env('APP_NAME') }} promo" height="452"
+                      onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder-rect.jpg') }}';">
+                  </a>
+                </div>
+              @endforeach
+            </div>
+          @endif
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!--     
     @php
         $flash_deal = get_featured_flash_deal();
     @endphp
     @if ($flash_deal != null)
         <section class="mb-2 mb-md-3 mt-2 mt-md-3" id="flash_deal">
             <div class="container">
-                <!-- Top Section -->
                 <div class="d-flex flex-wrap mb-2 mb-md-3 align-items-baseline justify-content-between">
-                    <!-- Title -->
                     <h3 class="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
                         <span class="d-inline-block">{{ translate('Flash Sale') }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24"
@@ -63,7 +90,6 @@
                                 transform="translate(-15 -5)" fill="#fcc201" />
                         </svg>
                     </h3>
-                    <!-- Links -->
                     <div>
                         <div class="text-dark d-flex align-items-center mb-0">
                             <a href="{{ route('flash-deals') }}"
@@ -74,15 +100,14 @@
                             </span>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <!-- Countdown for small device -->
-                <div class="bg-white mb-3 d-md-none">
+               
+                <!-- <div class="bg-white mb-3 d-md-none">
                     <div class="aiz-count-down-circle" end-date="{{ date('Y/m/d H:i:s', $flash_deal->end_date) }}"></div>
                 </div>
 
                 <div class="row gutters-5 gutters-md-16">
-                    <!-- Flash Deals Baner & Countdown -->
                     <div class="flash-deals-baner col-xxl-4 col-lg-5 col-6 h-200px h-md-400px h-lg-475px">
                         <div class="h-100 w-100 w-xl-auto"
                             style="background-image: url('{{ uploaded_asset($flash_deal->banner) }}'); background-size: cover; background-position: center center;">
@@ -94,7 +119,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Flash Deals Products -->
                     <div class="col-xxl-8 col-lg-7 col-6">
                         @php
                             $flash_deal_products = get_flash_deal_products($flash_deal->id);
@@ -116,12 +140,10 @@
                                             <a href="{{ $product_url }}"
                                                 class="d-block py-md-3 overflow-hidden hov-scale-img"
                                                 title="{{ $flash_deal_product->product->getTranslation('name') }}">
-                                                <!-- Image -->
                                                 <img src="{{ get_image($flash_deal_product->product->thumbnail) }}"
                                                     class="lazyload h-60px h-md-100px h-lg-140px mw-100 mx-auto has-transition"
                                                     alt="{{ $flash_deal_product->product->getTranslation('name') }}"
                                                     onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
-                                                <!-- Price -->
                                                 <div
                                                     class="fs-10 fs-md-14 mt-md-3 text-center h-md-48px has-transition overflow-hidden pt-md-4 flash-deal-price lh-1-5">
                                                     <span
@@ -142,11 +164,9 @@
             </div>
         </section>
     @endif
-
-    <!-- Today's deal -->
     <div id="todays_deal"  class="mb-2 mb-md-3 mt-2 mt-md-3">
 
-    </div>
+    </div> -->
 
     <!-- Featured Categories -->
     @if (count($featured_categories) > 0)
@@ -206,8 +226,7 @@
         </section>
     @endif
 
-    <!-- Banner section 1 -->
-    @php $homeBanner1Images = get_setting('home_banner1_images', null, $lang);   @endphp
+    <!-- @php $homeBanner1Images = get_setting('home_banner1_images', null, $lang);   @endphp
     @if ($homeBanner1Images != null)
         <div class="mb-2 mb-md-3 mt-2 mt-md-3">
             <div class="container">
@@ -237,7 +256,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endif -->
 
     <!-- Featured Products -->
     <div id="section_featured">
