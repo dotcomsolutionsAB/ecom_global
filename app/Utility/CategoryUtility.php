@@ -77,27 +77,7 @@ class CategoryUtility
 
     public static function create_initial_category($key)
     {
-        if ($key == "") {
-            return false;
-        }
-
-        try {
-            $gate = "https://activeitzone.com/activation/check/eCommerce/" . $key;
-
-            $stream = curl_init();
-            curl_setopt($stream, CURLOPT_URL, $gate);
-            curl_setopt($stream, CURLOPT_HEADER, 0);
-            curl_setopt($stream, CURLOPT_RETURNTRANSFER, 1);
-            $rn = curl_exec($stream);
-            curl_close($stream);
-
-            if ($rn == 'no') {
-                return false;
-            }
-        } catch (\Exception $e) {
-        }
-
-        return true;
+        return false;
     }
 
     public static function move_level_up($id)

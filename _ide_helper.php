@@ -18397,7 +18397,7 @@
          */ 
         public static function initializeCache()
         {
-                        return \MehediIitdu\CoreComponentRepository\CoreComponentRepository::initializeCache();
+                        // return \MehediIitdu\CoreComponentRepository\CoreComponentRepository::initializeCache();
         }
                     /**
          * 
@@ -18406,7 +18406,7 @@
          */ 
         public static function finalizeCache($addon)
         {
-                        return \MehediIitdu\CoreComponentRepository\CoreComponentRepository::finalizeCache($addon);
+                        // return \MehediIitdu\CoreComponentRepository\CoreComponentRepository::finalizeCache($addon);
         }
          
     }

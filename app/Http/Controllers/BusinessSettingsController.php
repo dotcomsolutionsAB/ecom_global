@@ -43,7 +43,7 @@ class BusinessSettingsController extends Controller
     public function activation(Request $request)
     {
         // CoreComponentRepository::instantiateShopRepository();
-        CoreComponentRepository::initializeCache();
+        // CoreComponentRepository::initializeCache();
         return view('backend.setup_configurations.activation');
     }
 
